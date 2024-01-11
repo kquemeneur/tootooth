@@ -13,7 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
-build.gradle.kts
 gradle.properties
 gradle/
 gradlew
