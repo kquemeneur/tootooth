@@ -1,4 +1,4 @@
-package com.example.bluetoothsample
+package fr.enssat.bluetoothhid.argentin_quemeneur.tootooth
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Bluetooth
 import androidx.compose.material.icons.filled.BluetoothDisabled
 import androidx.compose.material3.Button
@@ -27,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-
 
 @Composable
 fun BluetoothUiConnection(bluetoothController: BluetoothController) {
@@ -83,7 +83,6 @@ fun BluetoothUiConnection(bluetoothController: BluetoothController) {
                 }
             }
 
-
         }
 }
 
@@ -97,71 +96,24 @@ fun BluetoothDesk(bluetoothController: BluetoothController) {
         val keyboardSender = KeyboardSender(connected.btHidDevice, connected.hostDevice)
 
 
-
         fun press(shortcut: Shortcut, releaseModifiers: Boolean = true) {
             @SuppressLint("MissingPermission")
             val result = keyboardSender.sendKeyboard(shortcut.shortcutKey, shortcut.modifiers, releaseModifiers)
             if (!result) Toast.makeText(context,"can't find keymap for $shortcut",Toast.LENGTH_LONG).show()
         }
 
-        fun alphanum (){
-            press(Shortcut(KeyEvent.KEYCODE_A))
-            press(Shortcut(KeyEvent.KEYCODE_B))
-            press(Shortcut(KeyEvent.KEYCODE_C))
-            press(Shortcut(KeyEvent.KEYCODE_D))
-            press(Shortcut(KeyEvent.KEYCODE_E))
-            press(Shortcut(KeyEvent.KEYCODE_F))
-            press(Shortcut(KeyEvent.KEYCODE_G))
-            press(Shortcut(KeyEvent.KEYCODE_H))
-            press(Shortcut(KeyEvent.KEYCODE_I))
-            press(Shortcut(KeyEvent.KEYCODE_J))
-            press(Shortcut(KeyEvent.KEYCODE_K))
-            press(Shortcut(KeyEvent.KEYCODE_L))
-            press(Shortcut(KeyEvent.KEYCODE_M))
-            press(Shortcut(KeyEvent.KEYCODE_N))
-            press(Shortcut(KeyEvent.KEYCODE_O))
-            press(Shortcut(KeyEvent.KEYCODE_P))
-            press(Shortcut(KeyEvent.KEYCODE_Q))
-            press(Shortcut(KeyEvent.KEYCODE_R))
-            press(Shortcut(KeyEvent.KEYCODE_S))
-            press(Shortcut(KeyEvent.KEYCODE_T))
-            press(Shortcut(KeyEvent.KEYCODE_U))
-            press(Shortcut(KeyEvent.KEYCODE_V))
-            press(Shortcut(KeyEvent.KEYCODE_W))
-            press(Shortcut(KeyEvent.KEYCODE_X))
-            press(Shortcut(KeyEvent.KEYCODE_Y))
-            press(Shortcut(KeyEvent.KEYCODE_Z))
-
-            press(Shortcut(KeyEvent.KEYCODE_SPACE))
-
-            press(Shortcut(KeyEvent.KEYCODE_1,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_2,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_3,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_4,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_5,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_6,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_7,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_8,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-            press(Shortcut(KeyEvent.KEYCODE_9,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
-
-          }
-
-        Column( modifier = Modifier.fillMaxWidth().padding(20.dp)) {
+        Column( modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)) {
 
             Spacer(modifier = Modifier.size(20.dp))
-            Text("Slide Desk")
+            Text("HID Keyboard")
             Spacer(modifier = Modifier.size(10.dp))
-
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                Button(onClick = { alphanum()}) {
-                    Text("alphanum")
-                }
-
-                Spacer(modifier = Modifier.size(20.dp))
-
-                Button(onClick = {press(Shortcut(KeyEvent.KEYCODE_F,listOf(Shortcut.LEFT_CONTROL, Shortcut.LEFT_GUI)))}) {
-                    Text("full screen")
-                }
+            Keyboard { keyCode ->
+                press(Shortcut(keyCode))
             }
+
+
         }
 }
+

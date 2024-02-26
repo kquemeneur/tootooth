@@ -1,4 +1,4 @@
-package com.example.bluetoothsample
+package fr.enssat.bluetoothhid.argentin_quemeneur.tootooth
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

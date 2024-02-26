@@ -1,4 +1,4 @@
-package com.example.bluetoothsample
+package fr.enssat.bluetoothhid.argentin_quemeneur.tootooth
 
 /*
     Simplified version of
@@ -34,10 +34,6 @@ open class KeyboardSender(
         customSender(releaseModifiers)
         return true
     }
-
-
-
-
 
     val keyboardReport = KeyboardReport()
 

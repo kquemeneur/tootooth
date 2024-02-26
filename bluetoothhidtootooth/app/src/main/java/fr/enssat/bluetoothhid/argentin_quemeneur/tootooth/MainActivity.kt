@@ -1,4 +1,4 @@
-package com.example.bluetoothsample
+package fr.enssat.bluetoothhid.argentin_quemeneur.tootooth
 
 import android.Manifest
 import android.os.Build
@@ -10,10 +10,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import fr.enssat.bluetoothhid.argentin_quemeneur.tootooth.ThemeColors
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -25,8 +27,8 @@ class MainActivity : ComponentActivity() {
     private fun ensureBluetoothPermission(activity: ComponentActivity) {
         val requestPermissionLauncher = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()){
             isGranted: Boolean ->
-                if (isGranted) {Log.d(MainActivity.TAG, "Bluetooth connection granted")
-                } else { Log.e(MainActivity.TAG, "Bluetooth connection not granted, Bye!")
+                if (isGranted) {Log.d(TAG, "Bluetooth connection granted")
+                } else { Log.e(TAG, "Bluetooth connection not granted, Bye!")
                          activity.finish()
                 }
         }
@@ -47,7 +49,8 @@ class MainActivity : ComponentActivity() {
         bluetoothController = BluetoothController()
 
         setContent {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+
+                Surface(modifier = Modifier.fillMaxSize(), color = ThemeColors.background) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         BluetoothUiConnection(bluetoothController)
                         BluetoothDesk(bluetoothController)
